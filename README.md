@@ -1,4 +1,4 @@
-<img src="assets/logo.png" width="88" height="88" alt="Blyx Moments logo">
+<img src="assets/logo.png" width="88" height="88" alt="Blyx penguin sliding two sets of paired beads onto a shared counting rail.">
 
 # Blyx Moments
 
