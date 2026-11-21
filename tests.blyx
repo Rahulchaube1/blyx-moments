@@ -1,0 +1,18 @@
+use moments;
+use std::cli;
+fn check(ok: bool) { if !ok { stderr_line("moments check failed"); process_exit(1); } }
+fn main() {
+    let a = mom_summary([1, 2], [10, 12]);
+    let s = mom_merge(a, mom_update(mom_empty(), 3.0, 14.0));
+    check(at(s, 0) == 3.0 && at(s, 1) == 2.0 && at(s, 2) == 12.0);
+    check(at(s, 3) == 2.0 && at(s, 4) == 4.0 && at(s, 5) == 8.0);
+    check(mom_sample_sd_y(s) == 2.0 && mom_sample_sd_y(mom_empty()) == -1.0);
+    let opposite = mom_summary([1000000000001.0, 1000000000002.0, 1000000000003.0], [3, 2, 1]);
+    check(at(opposite, 3) == 2.0 && at(opposite, 4) == -2.0);
+    check(at(mom_merge(mom_empty(), s), 3) == 2.0 && at(mom_merge(s, mom_empty()), 4) == 4.0);
+    check(mom_sample_sd_y(mom_summary([1, 1], [5, 5])) == 0.0);
+    check(len(mom_summary([1], [])) == 0 && len(mom_update([], 1.0, 2.0)) == 0);
+    check(len(mom_update(a, 0.0 / 0.0, 0.0)) == 0);
+    check(len(mom_merge([9007199254740991.0, 0, 0, 0, 0, 0], s)) == 0);
+    println!("moments checks passed");
+}

@@ -1,0 +1,10 @@
+use moments;
+
+fn main() {
+    let morning = mom_summary([1, 2], [10, 12]);
+    let afternoon = mom_summary([3], [14]);
+    let day = mom_merge(morning, afternoon);
+    println!(at(day, 0));
+    println!(at(day, 2));
+    println!(mom_sample_sd_y(day));
+}
